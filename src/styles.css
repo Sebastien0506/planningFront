@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #313338;
+}
+
+nav {
+    background-color: #171717;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.span-nav{
+    font-family: 'Ranga', sans-serif;
+    color: white;
+    font-size: 2.5rem;
+    margin-left: 2%;
+}
+.ul-nav {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+.li-nav {
+    list-style: none;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+
+h1{
+    color: white;
+}
+p {
+    color: white;
+}
+
+label{
+    color: white;
+}
+
+
+.div-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.form {
+    background-color: #1E1E1E;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.title-form {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.input-group {
+    width: 100%;
+    text-align: left;
+}
+
+.label-form {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #cccccc;
+}
+
+.input-form {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.input-form::placeholder {
+    color: #888;
+}
+
+.btn-submit {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+}

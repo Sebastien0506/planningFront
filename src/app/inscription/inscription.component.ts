@@ -10,3 +10,7 @@ import { Component } from '@angular/core';
 export class InscriptionComponent {
 
 }
+
+export function validationInscription() : boolean {
+  return true;
+}

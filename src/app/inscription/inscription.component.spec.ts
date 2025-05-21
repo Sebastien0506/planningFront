@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InscriptionComponent } from './inscription.component';
+import { validationInscription } from './inscription.component';
 
 describe('InscriptionComponent', () => {
   let component: InscriptionComponent;

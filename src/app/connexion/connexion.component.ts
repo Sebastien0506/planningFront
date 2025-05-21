@@ -49,7 +49,7 @@ export class ConnexionComponent {
       console.log("❌ Mot de passe invalide : il doit contenir au moins 6 caractères.");
       return;
     }
-
+    //On initialise les variables pour les caractère spéciaux
     let contientChiffre = false;
     let contientCaractereSpecial = false;
 
@@ -59,7 +59,7 @@ export class ConnexionComponent {
       if (code >= 48 && code <= 57) {
         contientChiffre = true;
       }
-
+      //On renseigne les caractères spéciaux que l'on veut
       if (code === 35 || code === 36 || code === 37 || code === 64) {
         contientCaractereSpecial = true;
       }

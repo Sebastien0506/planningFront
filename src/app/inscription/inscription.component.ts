@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-inscription',
   standalone: true,
@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './inscription.component.css'
 })
 export class InscriptionComponent {
+  
   username: string = "";
   lastname: string = "";
   email: string = "";

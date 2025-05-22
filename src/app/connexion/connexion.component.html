@@ -1,7 +1,7 @@
 <div class="div-form">
     <div class="form">
         <h1 class="title-form">Connexion</h1>
-        <form action="" class="formulaire">
+        <form (ngSubmit)="envoyer()" class="formulaire">
             
             <div class="input-group">
                 <label for="email" class="label-form">Email :</label>
@@ -13,7 +13,7 @@
                 <input [(ngModel)]="password" name="password" type="password" id="password" placeholder="Entrez votre mot de passe" class="input-form">
             </div>
             <button>Afficher dans la console</button>
-            <button (click)="valideInput(email, password)" class="btn-submit">Se Connecter</button>
+            <button type="submit" class="btn-submit">Se Connecter</button>
         </form>
     </div>
 </div>

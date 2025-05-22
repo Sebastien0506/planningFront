@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ConnexionService } from '../connexion.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth-service.service';
 
 @Component({
   selector: 'app-connexion',
@@ -8,22 +11,24 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css'
 })
+
 export class ConnexionComponent {
   email: string = '';
   password: string = '';
 
+  constructor(private connexionService: ConnexionService, private router: Router, private authService: AuthService) {}
   // ✅ Vérifie l'email et le mot de passe saisis
-  valideInput(email: string, password: string): void {
+  valideInput(email: string, password: string): boolean {
     // Vérifie que l'email est bien une chaîne
     if (typeof email !== 'string') {
       console.log("❌ L'email doit être une chaîne de caractères.");
-      return;
+      return false;
     }
 
     // Vérifie que l'email contient bien un @ et un .
     if (!email.includes('@') || !email.includes('.')) {
       console.log('❌ Email invalide : il doit contenir @ et .');
-      return;
+      return false;
     }
 
     // Vérifie que chaque caractère est autorisé
@@ -38,7 +43,7 @@ export class ConnexionComponent {
         code !== 46     // .
       ) {
         console.log('❌ Email invalide : caractère non autorisé →', email[i]);
-        return;
+        return false;
       }
     }
 
@@ -47,7 +52,7 @@ export class ConnexionComponent {
     // Vérification du mot de passe
     if (typeof password !== 'string' || password.length < 6) {
       console.log("❌ Mot de passe invalide : il doit contenir au moins 6 caractères.");
-      return;
+      return false;
     }
     //On initialise les variables pour les caractère spéciaux
     let contientChiffre = false;
@@ -72,22 +77,49 @@ export class ConnexionComponent {
         code !== 64
       ) {
         console.log('❌ Mot de passe invalide : caractère non autorisé →', password[i]);
-        return;
+        return false;
       }
     }
 
     if (!contientChiffre || !contientCaractereSpecial) {
       console.log("❌ Mot de passe invalide : il doit contenir au moins un chiffre et un caractère spécial (#, $, %, @).");
-      return;
+      return false;
     }
 
-    console.log('✅ Mot de passe valide.');
+    console.log('✅ Email et mot de passe valide.');
+    return true;
   }
 
   // 📦 Méthode pour afficher les valeurs si besoin
   afficherValeurs(): void {
     console.log('Email :', this.email);
     console.log('Password :', this.password);
+  }
+
+  envoyer() {
+    const estValide = this.valideInput(this.email, this.password);
+    if(!estValide) {
+      console.log("Données invalides, requête bloquée.");
+      return;
+    }
+    const data = {
+      email: this.email,
+      password: this.password
+    };
+   this.connexionService.envoyerConnexion(data).subscribe({
+    next: (res) => {
+      console.log('Connexion réussie', res);
+
+      this.authService.fetchUserRole();
+      setTimeout(() => this.router.navigate(['/']), 300);
+      
+
+    },
+    error: (error) => {
+      console.error('Erreur lors de la connexion : ', error);
+    }
+    
+   });
   }
 }
 

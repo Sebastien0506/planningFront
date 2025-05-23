@@ -1,7 +1,7 @@
 <div class="div-form">
     <div class="form">
         <h1 class="title-form">Inscription</h1>
-        <form action="" class="formulaire">
+        <form (ngSubmit)="envoyer()" class="formulaire">
             <div class="input-group">
                 <label for="nom" class="label-form">Nom :</label>
                 <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Entrez votre nom" class="input-form">
@@ -19,7 +19,7 @@
                 <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Entrez votre mot de passe" class="input-form">
             </div>
             <button (click)="afficherValeurs()">Afficher dans la console</button>
-            <button (click)="validInscription(username, lastname, email, password)" class="btn-submit">S'inscrire</button>
+            <button type="submit" class="btn-submit">S'inscrire</button>
         </form>
     </div>
 </div>

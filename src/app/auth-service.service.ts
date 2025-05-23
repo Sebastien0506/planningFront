@@ -8,11 +8,11 @@ export class AuthService {
   role$ = this.roleSubject.asObservable();
 
   constructor(private http: HttpClient) {}
-
+//On fait une requête au back pour récupérer le role de l'utilisateur connecter 
   fetchUserRole() {
     this.http.get<{ role: string }>('http://localhost:8000/api/get_user_role/', {
       withCredentials: true
-    }).subscribe({
+    }).subscribe({//On récupère le role
       next: (res) => this.roleSubject.next(res.role),
       error: () => this.roleSubject.next(null)
     });
@@ -22,7 +22,17 @@ export class AuthService {
     return this.roleSubject.value !== null;
   }
 
-  logout() {
-    this.roleSubject.next(null);
+  logout() : void{
+    this.http.post('http://localhost:8000/logout/', {}, {
+      withCredentials: true 
+    }).subscribe({
+      next: () => {
+        this.roleSubject.next(null);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error("Erreur lors de la déconnexion", err);
+      }
+    });
   }
 }

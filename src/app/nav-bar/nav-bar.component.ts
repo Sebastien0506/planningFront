@@ -11,6 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
+  //On injecte "AuthService" pour récupérer le role de l'utilisateur
   private authService = inject(AuthService);
   role = toSignal(this.authService.role$); // 🔥 transforme l'observable en signal
 
@@ -20,6 +21,5 @@ export class NavBarComponent {
 
   logout() {
     this.authService.logout();
-    window.location.reload();
   }
 }

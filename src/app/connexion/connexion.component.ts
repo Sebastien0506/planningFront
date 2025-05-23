@@ -95,22 +95,26 @@ export class ConnexionComponent {
     console.log('Email :', this.email);
     console.log('Password :', this.password);
   }
-
+  //On crée la fonction qui permet l'envoie des données au back
   envoyer() {
+    //On vérifie si les données sont valide
     const estValide = this.valideInput(this.email, this.password);
     if(!estValide) {
       console.log("Données invalides, requête bloquée.");
       return;
     }
+    //On stock les données dans la variable data
     const data = {
       email: this.email,
       password: this.password
     };
+    //On envoie les données
    this.connexionService.envoyerConnexion(data).subscribe({
     next: (res) => {
       console.log('Connexion réussie', res);
 
       this.authService.fetchUserRole();
+      //On redirige l'utilisteur
       setTimeout(() => this.router.navigate(['/']), 300);
       
 

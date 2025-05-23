@@ -2,11 +2,19 @@
 <nav>
    <span class="span-nav"><a routerLink="/">Planeasy</a></span>
    <ul class="ul-nav">
-      <li class="li-nav"><a routerLink="/inscription">Inscription</a></li>
-      <li class="li-nav"><a routerLink="/connexion">Connexion</a></li>
-      @if(role() === 'superadmin'){
-         <li><a routerLink="/admindashboard">admindashboard</a></li>
-
+      @if(role() === "superadmin" || role() === "admin" || role() === "employe"){
+         <li class="li-nav"><a href="">Mon profil</a></li>
+         <li class="li-nav"><a href="">Planning</a></li>
+         <li class="li-nav"><a href="">Vacances</a></li>
+         @if(role() === "superadmin" || role() === "admin"){
+            <li class="li-nav"><a href="">AdminDashboard</a></li>
+         }
+         <li class="li-nav"><a (click)="logout()">deconnexion</a></li>
+      } @else {
+         <li class="li-nav"><a routerLink="/inscription">Inscription</a></li>
+         <li class="li-nav"><a routerLink="/connexion">Connexion</a></li>
       }
+      
+      
    </ul>
 </nav>

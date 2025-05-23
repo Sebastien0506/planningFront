@@ -1,0 +1,40 @@
+.button-admin-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  
+  .button-admin {
+    background-color: #1E1E1E;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;   /* centre horizontalement */
+    align-items: center;       /* centre verticalement */
+    min-height: 400px;         /* optionnel : pour fixer la hauteur du carré noir */
+  }
+  
+  .button-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* centre les boutons horizontalement */
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .button-list button {
+    width: 100%;
+    max-width: 250px;
+    font-size: 1.2rem;
+    padding: 0.75rem;
+    background-color: #0071E3;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }

@@ -12,17 +12,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent {
+ 
   private authService = inject(AuthService);
   role = toSignal(this.authService.role$);
-
- 
-  constructor( private employesServices: EmployesService) {}
-
-
-  viewAllEmployer() {
-    this.employesServices.envoyerRequest().subscribe({
-      next: (res) => console.log("Employes reçus : ", res),
-      error: (err) => console.error("Erreur : ", err)
-    });
-  }
+  
+  
 }

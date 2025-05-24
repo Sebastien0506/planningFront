@@ -7,7 +7,7 @@
          <li class="li-nav"><a href="">Planning</a></li>
          <li class="li-nav"><a href="">Vacances</a></li>
          @if(role() === "superadmin" || role() === "admin"){
-            <li class="li-nav"><a href="">AdminDashboard</a></li>
+            <li class="li-nav"><a routerLink="/adminDashboard">AdminDashboard</a></li>
          }
          <li class="li-nav"><a (click)="logout()">deconnexion</a></li>
       } @else {

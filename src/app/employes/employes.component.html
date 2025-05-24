@@ -1,0 +1,28 @@
+<h2>Liste des employés</h2>
+
+<p *ngIf="isLoading" style="text-align: center; color: white;">Chargement des employés...</p>
+
+<div *ngIf="!isLoading">
+
+  <div class="list-employe">
+    <p>Nom</p>
+    <p>Prénom</p>
+    <p>Email</p>
+    <p>Action</p>
+  </div>
+
+  <div class="tableau-employe" *ngIf="employes.length > 0">
+    <div *ngFor="let emp of employes" class="name-employe">
+      <p>{{ emp.username }}</p>
+      <p>{{ emp.last_name }}</p>
+      <p>{{ emp.email }}</p>
+      <p>
+        <!-- Tu pourras mettre des boutons ici -->
+        <button>Modifier</button>
+        <button>Supprimer</button>
+      </p>
+    </div>
+  </div>
+
+  <p *ngIf="employes.length === 0" style="text-align: center; color: white;">Aucun employé trouvé.</p>
+</div>

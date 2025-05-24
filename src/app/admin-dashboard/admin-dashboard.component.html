@@ -4,7 +4,7 @@
     <div class="button-admin">
         <div class="button-list">
             @if(role() === "superadmin"){
-                <button><a (click)="viewAllEmployer()">Gérez les employers</a></button>
+                <button><a routerLink="/viewAllEmployes">Gérez les employers</a></button>
                 <button><a href="">Gérez les magasins</a></button>
                 <button><a href="">Gérez les contrats</a></button>
                 <button><a href="">Générer le planning</a></button>
@@ -20,3 +20,6 @@
         
     </div>
 </div>
+
+
+

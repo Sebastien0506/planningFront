@@ -18,8 +18,8 @@
       <p>{{ emp.email }}</p>
       <p>
         <!-- Tu pourras mettre des boutons ici -->
-        <button>Modifier</button>
-        <button>Supprimer</button>
+        <button [routerLink]="['/viewDetailEmployer', emp.id]">Modifier</button>
+        <button (click)="onDeleteUser(emp.id)">Supprimer</button>
       </p>
     </div>
   </div>

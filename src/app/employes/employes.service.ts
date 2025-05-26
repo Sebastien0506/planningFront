@@ -11,6 +11,8 @@ export interface Employe {
 export interface ViewEmployes {
   employes: Employe[]
 }
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,5 +23,11 @@ export class EmployesService {
     return this.http.get<Employe[]>('http://localhost:8000/api/view_employes/', {
       withCredentials: true
     })
+  }
+
+  deleteRequest(userId: number) : Observable<any>{
+    return this.http.delete(`http://localhost:8000/api/delete_employe/${userId}/`, {
+      withCredentials: true
+    });
   }
 }

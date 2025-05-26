@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { EmployesService } from './employes.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../auth-service.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-employes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './employes.component.html',
   styleUrl: './employes.component.css'
 })
 export class EmployesComponent implements OnInit {
+  private authService = inject(AuthService);
+  role = toSignal(this.authService.role$);
+  
   employes: any[] = [];
   isLoading: boolean = false; // ✅ Déclaration
 
@@ -32,5 +38,18 @@ export class EmployesComponent implements OnInit {
         this.isLoading = false; // ✅ correction ici aussi
       }
     });
+  }
+
+  onDeleteUser(userId: number) {
+    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
+      this.employesServices.deleteRequest(userId).subscribe({
+        next: () => {
+          alert("Utilisateur supprimé !");
+        },
+        error: (err) => {
+          alert("Erreur lors de la suppression.");
+        }
+      });
+    }
   }
 }

@@ -1,0 +1,8 @@
+<form (ngSubmit)="envoyerRequest()" #formMagasin="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Nom du magasin</mat-label>
+      <input matInput type="text" name="name" [(ngModel)]="name" required />
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+  </form>

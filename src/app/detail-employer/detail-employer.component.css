@@ -1,0 +1,17 @@
+.div-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    color: white;
+}
+.jour-container {
+    display: flex;
+    flex-wrap: wrap;
+}

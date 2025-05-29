@@ -1,1 +1,74 @@
-<p>detail-employer works!</p>
+<div *ngIf="isLoading">Chargement</div>
+<div class="div-form">
+<h3>Modifier l'employer</h3>
+
+  <form *ngIf="!isLoading" class="form" (ngSubmit)="updateEmployer()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="employe.last_name" name="last_name"  required/>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom</mat-label>
+      <input matInput [(ngModel)]="employe.username" name="username" required/>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="employe.email" name="email"  required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Contrat</mat-label>
+      <input matInput [(ngModel)]="employe.contrat_employe.contrat_name" name="contrat_name" required>
+    </mat-form-field>
+   
+    <label>Jours de travail</label>
+    <div class="jours-container">
+      <mat-checkbox
+        *ngFor="let jour of joursDisponibles"
+        [checked]="employe?.working_day[0]?.working_day.includes(jour)"
+        (change)="onJourChange($event.checked, jour)">
+        {{ jour }}
+      </mat-checkbox>
+    </div>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Heure de début</mat-label>
+      <input
+        matInput
+        [ngxMatTimepicker]="pickerStart"
+        [format]="24"
+        [(ngModel)]="employe.working_day[0].start_job"
+        name="start_job"
+      />
+      <ngx-mat-timepicker #pickerStart></ngx-mat-timepicker>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Heure de fin</mat-label>
+      <input
+        matInput
+        [ngxMatTimepicker]="pickerEnd"
+        [format]="24"
+        [(ngModel)]="employe.working_day[0].end_job"
+        name="end_job"
+      />
+      <ngx-mat-timepicker #pickerEnd></ngx-mat-timepicker>
+    </mat-form-field>
+
+    <label>Magasins</label>
+<div class="magasins-container">
+  <mat-checkbox
+  *ngFor="let shop of employe?.magasins_data"
+  [checked]="selectedShop.includes(shop.id)"
+  (change)="onShopChange($event.checked, shop.id)">
+  {{ shop.shop_name }}
+</mat-checkbox>
+</div>
+
+    
+<button (click)="viewAllDetail()">Afficher les details</button>
+<button mat-raised-button type="submit">Modifier</button>
+</form>
+</div>

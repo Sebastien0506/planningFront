@@ -5,6 +5,8 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { EmployesComponent } from './employes/employes.component';
 import { DetailEmployerComponent } from './detail-employer/detail-employer.component';
+import { ShopComponent } from './shop/shop.component';
+import { Component } from '@angular/core';
 export const routes: Routes = [
     {path: 'navBar', component: NavBarComponent},
     {path: 'inscription', component: InscriptionComponent},
@@ -12,6 +14,7 @@ export const routes: Routes = [
     {path: 'adminDashboard', component: AdminDashboardComponent},
     {path: 'viewAllEmployes', component: EmployesComponent},
     {path: 'viewDetailEmployer/:id', component: DetailEmployerComponent},
+    {path: 'viewAllShop', component: ShopComponent}
 
     
 ];

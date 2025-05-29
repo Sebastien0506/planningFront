@@ -12,6 +12,8 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
 }
 .span-nav{
     font-family: 'Ranga', sans-serif;
@@ -121,3 +123,7 @@ label{
 .btn-submit:hover {
     background-color: #45a049;
 }
+
+
+
+

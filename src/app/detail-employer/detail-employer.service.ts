@@ -30,10 +30,19 @@ export interface detailEmploye {
 export class DetailEmployerService {
 
   constructor(private http: HttpClient) { }
-
+  // On récupère les données de l'employé
   detailEmploye(userId: number): Observable<Employe[]> {
     return this.http.get<Employe[]>(`http://localhost:8000/api/detail_employe/${userId}`, {
       withCredentials: true
     });
   }
+  
+
+  //On envoie les donnée
+  sendRequestData(userId: number, data: any): Observable<Employe[]> {
+    return this.http.patch<Employe[]>(`http://localhost:8000/api/up_employer/${userId}/`, data, {
+      withCredentials: true
+    });
+  }
+  
 }

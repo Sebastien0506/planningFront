@@ -1,0 +1,11 @@
+p {
+    color: black;
+}
+
+body {
+    background-color: blue;
+}
+
+::ng-deep .mat-mdc-checkbox .mdc-label {
+    color: black !important;
+  }

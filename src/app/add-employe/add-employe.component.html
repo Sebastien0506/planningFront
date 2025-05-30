@@ -1,0 +1,47 @@
+<ng-container *ngIf="role() === 'superadmin'; else pasAutorise">
+    <mat-dialog-content>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Nom:</mat-label>
+          <input matInput [(ngModel)]="employe.name" name="name" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Prénom:</mat-label>
+          <input matInput [(ngModel)]="employe.lastname" name="lastname" required>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Email:</mat-label>
+          <input matInput [(ngModel)]="employe.email" name="email">
+        </mat-form-field>
+  
+        <label>Magasins</label>
+        <div *ngFor="let magasin of magasins" class="magasin">
+          <mat-checkbox
+            [(ngModel)]="magasin.checked"
+            [ngModelOptions]="{standalone: true}">
+            {{ magasin.shop_name }}
+          </mat-checkbox>
+        </div>
+  
+       
+      </form>
+      <a mat-button>Ajouter</a>
+    </mat-dialog-content>
+  </ng-container>
+  
+  <ng-template #pasAutorise>
+    <p>Vous n'avez pas l'autorisation</p>
+  </ng-template>
+
+
+<!-- <form (ngSubmit)="onSubmit()" #form="ngForm">
+  <label for="nom">Nom :</label>
+  <input id="nom" name="nom" [(ngModel)]="employe.nom" required />
+
+  <label for="email">Email :</label>
+  <input id="email" name="email" [(ngModel)]="employe.email" required />
+
+  <button type="submit">Ajouter</button>
+</form> -->

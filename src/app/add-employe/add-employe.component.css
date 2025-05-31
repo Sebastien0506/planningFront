@@ -9,3 +9,7 @@ body {
 ::ng-deep .mat-mdc-checkbox .mdc-label {
     color: black !important;
   }
+
+.button {
+    background-color: black;
+}

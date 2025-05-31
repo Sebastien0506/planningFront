@@ -7,10 +7,6 @@ export interface Contrat {
   name_contrat: string;
 }
 
-export interface ViewContrat {
-    contrats: Contrat[]
-}
-
 export interface Magasin {
   id: number;
   shop_name: string;
@@ -24,14 +20,19 @@ export class AddEmployeService {
 
   constructor(private http: HttpClient) { }
 
-  retrieveAllContrat(): Observable<ViewContrat> {
-    return this.http.get<ViewContrat>('http://localhost:8000/api/view_contrat/', {
+  retrieveAllContrat(): Observable<Contrat[]> {
+    return this.http.get<Contrat[]>('http://localhost:8000/api/view_contrat/', {
       withCredentials: true
     })
   }
 
   retrieveAllShop(): Observable<Magasin[]> {
     return this.http.get<Magasin[]>('http://localhost:8000/api/view_shop/', {
+      withCredentials: true
+    })
+  }
+  addEmploye(data: any) {
+    return this.http.post('http://localhost:8000/api/add_employer/', data, {
       withCredentials: true
     })
   }

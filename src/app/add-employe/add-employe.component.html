@@ -1,47 +1,91 @@
 <ng-container *ngIf="role() === 'superadmin'; else pasAutorise">
-    <mat-dialog-content>
-      <form>
-        <mat-form-field appearance="fill">
-          <mat-label>Nom:</mat-label>
-          <input matInput [(ngModel)]="employe.name" name="name" required>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill">
-          <mat-label>Prénom:</mat-label>
-          <input matInput [(ngModel)]="employe.lastname" name="lastname" required>
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>Email:</mat-label>
-          <input matInput [(ngModel)]="employe.email" name="email">
-        </mat-form-field>
-  
-        <label>Magasins</label>
-        <div *ngFor="let magasin of magasins" class="magasin">
-          <mat-checkbox
-            [(ngModel)]="magasin.checked"
-            [ngModelOptions]="{standalone: true}">
-            {{ magasin.shop_name }}
-          </mat-checkbox>
-        </div>
-  
-       
-      </form>
-      <a mat-button>Ajouter</a>
-    </mat-dialog-content>
-  </ng-container>
-  
-  <ng-template #pasAutorise>
-    <p>Vous n'avez pas l'autorisation</p>
-  </ng-template>
+  <mat-dialog-content>
+    <form #employeForm="ngForm">
+      <!-- Nom -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="employe.name" name="username" required />
+      </mat-form-field>
+
+      <!-- Prénom -->
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput [(ngModel)]="employe.lastname" name="lastname" required />
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="employe.email" name="email" />
+      </mat-form-field>
+
+      <!-- Magasins -->
+      <label>Magasins</label>
+      <div *ngFor="let magasin of magasins; let i = index" class="magasin">
+        <mat-checkbox [(ngModel)]="magasin.checked" name="magasin_{{ i }}">
+          {{ magasin.shop_name }}
+        </mat-checkbox>
+      </div>
+
+      <!-- Contrats -->
+      <label>Contrats</label>
+      <div *ngFor="let contrat of contrats; let i = index">
+        <mat-checkbox [(ngModel)]="contrat.checked" name="contrat_{{ i }}">
+          {{ contrat.contrat_name }}
+        </mat-checkbox>
+      </div>
+
+      <!-- Heure de début -->
+      <mat-form-field appearance="fill">
+        <mat-label>Heure de début</mat-label>
+        <input
+          matInput
+          [ngxMatTimepicker]="pickerStart"
+          [format]="24"
+          [(ngModel)]="employe.working_day.start_job"
+          name="start_job"
+        />
+        <ngx-mat-timepicker #pickerStart></ngx-mat-timepicker>
+      </mat-form-field>
+
+      <!-- Heure de fin -->
+      <mat-form-field appearance="fill">
+        <mat-label>Heure de fin</mat-label>
+        <input
+          matInput
+          [ngxMatTimepicker]="pickerEnd"
+          [format]="24"
+          [(ngModel)]="employe.working_day.end_job"
+          name="end_job"
+        />
+        <ngx-mat-timepicker #pickerEnd></ngx-mat-timepicker>
+      </mat-form-field>
+
+      <!-- Jours de travail -->
+      <label>Jours</label>
+      <div *ngFor="let jour of joursDisponible">
+        <mat-checkbox
+          [checked]="employe.working_day.working_day.includes(jour)"
+          (change)="toggleJour(jour, $event.checked)"
+          name="jour_{{ jour }}"
+        >
+          {{ jour }}
+        </mat-checkbox>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <!-- ✅ Bouton déplacé ici en dehors de mat-dialog-content -->
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="button" (click)="ajouterEmploye()">
+      Ajouter
+    </button>
+  </mat-dialog-actions>
+</ng-container>
+
+<ng-template #pasAutorise>
+  <p>Vous n'avez pas l'autorisation</p>
+</ng-template>
 
 
-<!-- <form (ngSubmit)="onSubmit()" #form="ngForm">
-  <label for="nom">Nom :</label>
-  <input id="nom" name="nom" [(ngModel)]="employe.nom" required />
 
-  <label for="email">Email :</label>
-  <input id="email" name="email" [(ngModel)]="employe.email" required />
-
-  <button type="submit">Ajouter</button>
-</form> -->

@@ -1,24 +1,29 @@
-<!-- dans cette section on pourra gerez les employé, gérez les magasin, gérez les contrats et générer le planning-->
+<!-- dans cette section on pourra gérer les employés, les magasins, les contrats et générer le planning -->
 <div class="button-admin-list">
     <div class="button-admin">
-        <div class="button-list">
-            @if(role() === "superadmin"){
-                <button><a routerLink="/viewAllEmployes">Gérez les employers</a></button>
-                <button><a href="/viewAllShop">Gérez les magasins</a></button>
-                <button><a href="">Gérez les contrats</a></button>
-                <button><a href="">Générer le planning</a></button>
-            } @else if(role() === "admin" || role() === "superadmin") {
-                <button><a href="">Voir les demandes de vacance</a></button>
-                 
-            } @else {
-                <p>Vous n'avez pas le droit de voir cette page</p>
-            }
-            
-
-        </div>
-        
+      <div class="button-list">
+  
+        <!-- Boutons SUPERADMIN -->
+        <ng-container *ngIf="role() === 'superadmin'">
+          <button routerLink="/viewAllEmployes">Gérez les employés</button>
+          <button routerLink="/viewAllShop">Gérez les magasins</button>
+          <button routerLink="/contrats">Gérez les contrats</button>
+          <button routerLink="/planning">Générer le planning</button>
+        </ng-container>
+  
+        <!-- Bouton vacances visible pour ADMIN ou SUPERADMIN -->
+        <ng-container *ngIf="role() === 'admin' || role() === 'superadmin'">
+          <button routerLink="/vacances">Voir les demandes de vacances</button>
+        </ng-container>
+  
+        <!-- Message d'interdiction si autre rôle -->
+        <ng-container *ngIf="role() !== 'admin' && role() !== 'superadmin'">
+          <p>Vous n'avez pas le droit de voir cette page</p>
+        </ng-container>
+  
+      </div>
     </div>
-</div>
+  </div>
 
 
 

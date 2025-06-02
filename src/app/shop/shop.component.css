@@ -1,0 +1,30 @@
+h3 {
+    color: white;
+    text-align: center;
+    margin-top: 2%;
+    font-family: 'Poppins', sans-serif;
+}
+.form_shop {
+    margin-top: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .col-nom {
+    width: 60%;
+  }
+  
+  .col-actions {
+    width: 40%;
+    text-align: center;
+  }
+  .add_shop {
+    margin-bottom: 2%;
+  }

@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { AddShopComponent } from '../add-shop/add-shop.component';
+import { ModifyShopComponent } from '../modify-shop/modify-shop.component';
 
 @Component({
   selector: 'app-shop',
@@ -24,10 +25,12 @@ export class ShopComponent implements OnInit {
 
   shop: any[] = [];
   displayedColumns: string[] = ['shop_name', 'actions'];
+  shop_name: any;
 
   constructor(private shopService: ShopService, private dialog: MatDialog) {}
 
   ngOnInit() {
+    
     this.retrieveDataShop();
   }
   ouvrirFormulaireAdd(){
@@ -36,6 +39,14 @@ export class ShopComponent implements OnInit {
       width: '700px',
     });
     
+  }
+  //on créé le module pour modifier un magasin
+  ouvrirFormulaireModify(shopId: number) {
+    this.dialog.open(ModifyShopComponent, {
+      height: '700px',
+      width: '700px',
+      data: {shopId}
+    })
   }
 
   retrieveDataShop(): void {
@@ -48,6 +59,22 @@ export class ShopComponent implements OnInit {
         console.error("Erreur API :", err);
       }
     });
+  }
+  //On crée la fonction pour supprimer un magasin.
+  onDeleteShop(shopId: number) {//shopId est l'id du magasin que l'on veut supprimer
+    //On ajoute une boite de confirmation
+    if( confirm("Voulez vous vraiment supprimer ce magasin ?")){
+      //On fait appel à la fonction qui permet d'envoyer la requête.
+      this.shopService.deleteShop(shopId).subscribe({
+        //On affiche les messages.
+        next: () => {
+          alert("Magasin supprimer avec succès.");
+        },
+        error: () => {
+          alert("Erreur lors de la suppression");
+        }
+      });
+    }
   }
 }
 

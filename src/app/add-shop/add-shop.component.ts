@@ -7,6 +7,7 @@ import { AuthService } from '../auth-service.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import { AddShopService } from './add-shop.service';
 @Component({
   selector: 'app-add-shop',
   standalone: true,
@@ -19,7 +20,7 @@ export class AddShopComponent {
   role = toSignal(this.authServices.role$);
    
   shop_name: string = '';
-
+constructor (private addShop: AddShopService){}
   //On vérifie si les données sont valide
   validInput(): string {
     //On vérifie si le champ est bien de type string
@@ -43,11 +44,29 @@ export class AddShopComponent {
       return true;
     }
     if(!isAlphaOnly(this.shop_name)){
-      return 'Champ invalide.';
+      return `Le champ ${this.shop_name} contient des caractères invalide.`;
     }
     return "Donnée valide.";
   }
-  testValue(){
-    console.log(this.shop_name);
+  
+  sendRequest(){
+    const validateMessage = this.validInput();
+    if( validateMessage !== "Donnée valide."){
+      alert(validateMessage);
+      return;
+    }
+
+    const data = {
+      shop_name: this.shop_name
+    }
+
+    this.addShop.sendRequestData(data).subscribe({
+      next: () => {
+        alert('Magasin ajouté avec succès');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }

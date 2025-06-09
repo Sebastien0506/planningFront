@@ -86,6 +86,7 @@ export class ModifyShopComponent {
           alert("Magasin mis à jour.");
         },
         error: (err) => {
+          alert("Données incorrect. Seules les lettres, les chiffres et les espaces sont autorisés")
           console.log("Erreur lors de la mise à jour.", err);
         }
       });

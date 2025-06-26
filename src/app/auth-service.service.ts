@@ -35,4 +35,8 @@ export class AuthService {
       }
     });
   }
+
+  getCSRFToken() {
+    return this.http.get('http://localhost:8000/csrf', { withCredentials: true})
+  }
 }

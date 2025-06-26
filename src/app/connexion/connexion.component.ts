@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConnexionService } from '../connexion.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,9 @@ export class ConnexionComponent {
   password: string = '';
 
   constructor(private connexionService: ConnexionService, private router: Router, private authService: AuthService) {}
+  ngOnInit(){
+    this.authService.getCSRFToken().subscribe();
+  }
   // ✅ Vérifie l'email et le mot de passe saisis
   valideInput(email: string, password: string): boolean {
     // Vérifie que l'email est bien une chaîne

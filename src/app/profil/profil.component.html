@@ -1,0 +1,19 @@
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <ng-container *ngIf="user" >
+        <div style="display: flex; flex-direction: column; width: 300px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input matInput [(ngModel)]="user.username" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput [(ngModel)]="user.last_name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="user.email">
+            </mat-form-field>
+            <button mat-raised-button>Modifier</button>
+        </div>
+    </ng-container>
+</div>

@@ -3,7 +3,7 @@
    <span class="span-nav"><a routerLink="/">Planeasy</a></span>
    <ul class="ul-nav">
       @if(role() === "superadmin" || role() === "admin" || role() === "employe"){
-         <li class="li-nav"><a href="">Mon profil</a></li>
+         <li class="li-nav"><a href="/profil">Mon profil</a></li>
          <li class="li-nav"><a href="">Planning</a></li>
          <li class="li-nav"><a href="">Vacances</a></li>
          @if(role() === "superadmin" || role() === "admin"){

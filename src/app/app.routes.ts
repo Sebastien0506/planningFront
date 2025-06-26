@@ -7,6 +7,7 @@ import { EmployesComponent } from './employes/employes.component';
 import { DetailEmployerComponent } from './detail-employer/detail-employer.component';
 import { ViewContratComponent } from './view-contrat/view-contrat.component';
 import { ShopComponent } from './shop/shop.component';
+import { ProfilComponent } from './profil/profil.component';
 import { Component } from '@angular/core';
 export const routes: Routes = [
     {path: 'navBar', component: NavBarComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path: 'viewDetailEmployer/:id', component: DetailEmployerComponent},
     {path: 'viewAllShop', component: ShopComponent},
     {path: 'viewAllContrat', component: ViewContratComponent},
+    {path: 'profil', component: ProfilComponent},
 
     
 ];

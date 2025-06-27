@@ -1,19 +1,22 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <ng-container *ngIf="user" >
-        <div style="display: flex; flex-direction: column; width: 300px;">
-            <mat-form-field appearance="fill">
-                <mat-label>Nom</mat-label>
-                <input matInput [(ngModel)]="user.username" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Prénom</mat-label>
-                <input matInput [(ngModel)]="user.last_name">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput [(ngModel)]="user.email">
-            </mat-form-field>
-            <button mat-raised-button>Modifier</button>
-        </div>
-    </ng-container>
+  <ng-container *ngIf="user">
+    <form style="display: flex; flex-direction: column; width: 300px;" #userForm="ngForm" (ngSubmit)="modifierProfil()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="user.username" name="username" required />
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput [(ngModel)]="user.last_name" name="last_name" required />
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.email" name="email" required email />
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" [disabled]="!userForm.form.valid">Modifier</button>
+    </form>
+  </ng-container>
 </div>

@@ -19,4 +19,10 @@ export class ProfilService {
       withCredentials: true 
     });
   }
+
+  sendData(data: any) {
+    return this.http.put('http://localhost:8000/api/profil_user/', data, {
+      withCredentials: true
+    })
+  }
 }

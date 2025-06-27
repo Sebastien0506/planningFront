@@ -6,6 +6,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { AddVacationService } from './add-vacation.service';
 @Component({
   selector: 'app-add-vacation',
   standalone: true,
@@ -17,4 +18,56 @@ export class AddVacationComponent {
 startDate!: Date;
 endDate!: Date;
 
+constructor(private addVacationService: AddVacationService){}
+//On déclare les variables pour stocker les données.
+afficherData() {
+  console.log(this.startDate);
+  console.log(this.endDate);
+ }
+ validateInput(start_day: Date, end_day: Date): string {
+  const isValidDate = (d: any): boolean => {
+    return d instanceof Date && !isNaN(d.getTime());
+  };
+
+  if (!isValidDate(start_day)) {
+    return 'Le champ start_day doit être une date valide.';
+  }
+
+  if (!isValidDate(end_day)) {
+    return 'Le champ end_day doit être une date valide.';
+  }
+
+  if (start_day > end_day) {
+    return 'La date de début doit être antérieure à la date de fin.';
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (start_day < today) {
+    return 'La date de début ne peut pas être dans le passé.';
+  }
+
+  return 'Données valides.';
+}
+
+sendVacationRequest() {
+  const validateMessage = this.validateInput(this.startDate, this.endDate);
+
+  if(validateMessage !== "Données valides."){
+    alert("Les données ne sont pas valide.");
+  }
+  
+  const data = {
+    start_day: this.startDate,
+    end_day: this.endDate
+  };
+  this.addVacationService.sendVacation(data).subscribe({
+    next: () => {
+      alert("Donnée sauvegarder");
+    },
+    error: (err) => {
+       console.error("Erreur lors de la sauvegarde.", err);
+    }
+  });
+}
 }

@@ -9,6 +9,7 @@ import { ViewContratComponent } from './view-contrat/view-contrat.component';
 import { ShopComponent } from './shop/shop.component';
 import { ProfilComponent } from './profil/profil.component';
 import { Component } from '@angular/core';
+import { VacanceComponent } from './vacance/vacance.component';
 export const routes: Routes = [
     {path: 'navBar', component: NavBarComponent},
     {path: 'inscription', component: InscriptionComponent},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'viewAllShop', component: ShopComponent},
     {path: 'viewAllContrat', component: ViewContratComponent},
     {path: 'profil', component: ProfilComponent},
+    {path: 'vacance', component: VacanceComponent},
 
     
 ];

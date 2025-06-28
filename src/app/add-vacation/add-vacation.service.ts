@@ -11,7 +11,7 @@ export class AddVacationService {
   constructor(private http: HttpClient) { }
 
   sendVacation(data: any) {
-   return this.http.post('http://localhost:8000/api/', data, {
+   return this.http.post('http://localhost:8000/api/add_vacation/', data, {
       withCredentials: true
     });
 

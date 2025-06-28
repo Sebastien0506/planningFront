@@ -1,1 +1,58 @@
-<button mat-raised-button (click)="ouvrireFormulaire()">Demande de vacances</button>
+<button mat-raised-button (click)="ouvrireFormulaire()" data-cy="btn-open-dialog">Demande de vacances</button>
+<h4>Demandes de vacances</h4>
+<!-- permet de voir tout les demande de vacances -->
+ <div *ngIf="role() === 'superadmin'">
+    <table mat-table [dataSource]="vacationAll">
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.username}}</td>
+        </ng-container>
+        <ng-container matColumnDef="last_name">
+            <th mat-header-cell *matHeaderCellDef>Prénom</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.last_name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="start_day">
+            <th mat-header-cell *matHeaderCellDef>Date de début</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.start_day}}</td>
+        </ng-container>
+        <ng-container matColumnDef="end_day">
+            <th mat-header-cell *matHeaderCellDef>Date de fin</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.end_day}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="col-actions">Actions</th>
+            <td mat-cell *matCellDef="let vacances" class="col-actions">
+              <button mat-button color="primary">Accepter</button>
+              <button mat-button color="warn">Refuser</button>
+            </td>
+          </ng-container>
+       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+       <tr mat-row *matRowDef="let vacances; columns: columnsToDisplay"></tr>
+    </table>
+ </div>
+
+
+<!-- Permet de récupérer les demandes de vacances pour chaque utilisateur -->
+
+<div *ngIf="role() === 'admin' || role() === 'employe' ">
+    <table mat-table [dataSource]="vacation" class="mat-elevation-z8">
+        <ng-container matColumnDef="start_day">
+            <th mat-header-cell *matHeaderCellDef>Date de début</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.start_day}}</td>
+        </ng-container>
+        <ng-container matColumnDef="end_day">
+            <th mat-header-cell *matHeaderCellDef>Date de fin</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.end_day}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let vacances">{{vacances.status}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['start_day', 'end_day', 'status']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['start_day', 'end_day', 'status']"></tr>
+    </table>
+</div>

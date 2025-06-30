@@ -28,4 +28,10 @@ export class VacanceService {
       withCredentials: true
     })
   }
+
+  updateVacationStatus(vacationId: number, data: any){
+    return this.http.patch(`http://localhost:8000/api/up_vacation/${vacationId}`, data, {
+      withCredentials: true
+    })
+  }
 }

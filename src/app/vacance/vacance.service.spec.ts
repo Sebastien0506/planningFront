@@ -1,16 +1,21 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { VacanceComponent } from "./vacance.component";
 
-import { VacanceService } from './vacance.service';
+describe('VacationComponent.validateVacation', () => {
+  let component: VacanceComponent;
+  let fixture: ComponentFixture<VacanceComponent>;
 
-describe('VacanceService', () => {
-  let service: VacanceService;
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({imports: [VacanceComponent]}).compileComponents();
+  }));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(VacanceService);
+    fixture = TestBed.createComponent(VacanceComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  it('should create', () => {
+    expect(component).toBeDefined();
+  })
+})

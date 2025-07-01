@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ConnexionService } from '../connexion.service';
-import { Router } from '@angular/router';
+import { ConnexionService } from './connexion.service';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-connexion',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css'
 })
@@ -128,5 +130,7 @@ export class ConnexionComponent {
     
    });
   }
+
+  
 }
 

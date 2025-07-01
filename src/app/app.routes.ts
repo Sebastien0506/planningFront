@@ -10,6 +10,8 @@ import { ShopComponent } from './shop/shop.component';
 import { ProfilComponent } from './profil/profil.component';
 import { Component } from '@angular/core';
 import { VacanceComponent } from './vacance/vacance.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { NewpasswordComponent } from './newpassword/newpassword.component';
 export const routes: Routes = [
     {path: 'navBar', component: NavBarComponent},
     {path: 'inscription', component: InscriptionComponent},
@@ -21,6 +23,8 @@ export const routes: Routes = [
     {path: 'viewAllContrat', component: ViewContratComponent},
     {path: 'profil', component: ProfilComponent},
     {path: 'vacance', component: VacanceComponent},
+    {path: 'resetpassword', component: ResetpasswordComponent},
+    {path: 'newpassword', component: NewpasswordComponent}
 
     
 ];

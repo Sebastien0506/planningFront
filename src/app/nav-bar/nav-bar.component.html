@@ -4,7 +4,7 @@
    <ul class="ul-nav">
       @if(role() === "superadmin" || role() === "admin" || role() === "employe"){
          <li class="li-nav"><a href="/profil">Mon profil</a></li>
-         <li class="li-nav"><a href="">Planning</a></li>
+         <li class="li-nav"><a href="/planning">Planning</a></li>
          <li class="li-nav"><a href="/vacance">Vacances</a></li>
          @if(role() === "superadmin" || role() === "admin"){
             <li class="li-nav"><a routerLink="/adminDashboard">AdminDashboard</a></li>

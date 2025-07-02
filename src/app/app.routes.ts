@@ -12,6 +12,9 @@ import { Component } from '@angular/core';
 import { VacanceComponent } from './vacance/vacance.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
+import { PlanningComponent } from './planning/planning.component';
+
+
 export const routes: Routes = [
     {path: 'navBar', component: NavBarComponent},
     {path: 'inscription', component: InscriptionComponent},
@@ -24,7 +27,8 @@ export const routes: Routes = [
     {path: 'profil', component: ProfilComponent},
     {path: 'vacance', component: VacanceComponent},
     {path: 'resetpassword', component: ResetpasswordComponent},
-    {path: 'newpassword', component: NewpasswordComponent}
+    {path: 'newpassword', component: NewpasswordComponent},
+    {path: 'planning', component: PlanningComponent}
 
     
 ];

@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm install
-RUN npm run build -- --configuration=production --project=plannignFront
+RUN npm run build -- --configuration=production --project=planningFront
 
 # Étape 2 : serveur NGINX pour héberger les fichiers Angular compilés
 FROM nginx:alpine

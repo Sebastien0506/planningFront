@@ -1,19 +1,9 @@
-# Étape 1 : build de l'application Angular
-FROM node:20-alpine as build
-
-WORKDIR /app
-COPY . .
-
-RUN npm install
-RUN npm run build -- --configuration=production --project=planningFront
-
-# Étape 2 : serveur NGINX pour héberger les fichiers Angular compilés
 FROM nginx:alpine
 
-# ✅ Correction ici :
-COPY --from=build /app/dist/browser /usr/share/nginx/html
+# ✅ Copie le contenu exact de dist/browser
+COPY dist/browser /usr/share/nginx/html
 
-# Copie la config Nginx (optionnel)
+# (Optionnel) Configuration Nginx personnalisée
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

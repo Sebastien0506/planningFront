@@ -16,13 +16,13 @@
       <!-- Email -->
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="employe.email" name="email" />
+        <input matInput [(ngModel)]="employe.email" name="email" required/>
       </mat-form-field>
 
       <!-- Magasins -->
       <label>Magasins</label>
       <div *ngFor="let magasin of magasins; let i = index" class="magasin">
-        <mat-checkbox [(ngModel)]="magasin.checked" name="magasin_{{ i }}">
+        <mat-checkbox [(ngModel)]="magasin.checked" name="magasin_{{ i }}" required>
           {{ magasin.shop_name }}
         </mat-checkbox>
       </div>
@@ -30,7 +30,7 @@
       <!-- Contrats -->
       <label>Contrats</label>
       <div *ngFor="let contrat of contrats; let i = index">
-        <mat-checkbox [(ngModel)]="contrat.checked" name="contrat_{{ i }}">
+        <mat-checkbox [(ngModel)]="contrat.checked" name="contrat_{{ i }}" required>
           {{ contrat.contrat_name }}
         </mat-checkbox>
       </div>
@@ -44,7 +44,7 @@
           [format]="24"
           [(ngModel)]="employe.working_day.start_job"
           name="start_job"
-        />
+       required/>
         <ngx-mat-timepicker #pickerStart></ngx-mat-timepicker>
       </mat-form-field>
 
@@ -57,7 +57,7 @@
           [format]="24"
           [(ngModel)]="employe.working_day.end_job"
           name="end_job"
-        />
+        required/>
         <ngx-mat-timepicker #pickerEnd></ngx-mat-timepicker>
       </mat-form-field>
 
@@ -68,7 +68,7 @@
           [checked]="employe.working_day.working_day.includes(jour)"
           (change)="toggleJour(jour, $event.checked)"
           name="jour_{{ jour }}"
-        >
+       required >
           {{ jour }}
         </mat-checkbox>
       </div>

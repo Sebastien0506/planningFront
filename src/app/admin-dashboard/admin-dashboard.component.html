@@ -8,7 +8,7 @@
           <button routerLink="/viewAllEmployes">Gérez les employés</button>
           <button routerLink="/viewAllShop">Gérez les magasins</button>
           <button routerLink="/viewAllContrat">Gérez les contrats</button>
-          <button routerLink="/planning">Générer le planning</button>
+          <button (click)="generateCalendar()">Générer le planning</button>
         </ng-container>
   
         <!-- Bouton vacances visible pour ADMIN ou SUPERADMIN -->

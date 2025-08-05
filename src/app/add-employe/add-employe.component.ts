@@ -42,16 +42,25 @@ export class AddEmployeComponent {
           end_job: '',
         },
       };
+
+      private authServices = inject(AuthService);
+      role = toSignal(this.authServices.role$);
+      constructor(private dialogRef: MatDialogRef<AddEmployeComponent>, private addEmployerService: AddEmployeService) {}
+      joursDisponible = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+      toggleJour(jour: string, checked: boolean) {
+        const jours = this.employe.working_day.working_day;
+        const index = jours.indexOf(jour);
+
+        if(checked && index === -1) {
+          jours.push(jour);
+        } else if (!checked && index > -1){
+             jours.splice(index, 1);
+        }
+
+      }
     
       ngOnInit(): void {
-          this.addEmployerService.retrieveAllContrat().subscribe({
-            next: (res) => {
-              console.log("Contrat trouvé : ", res);
-            },
-            error: (err) => {
-              console.log("Erreur :", err);
-            }
-          });
+          
           this.addEmployerService.retrieveAllShop().subscribe({
             next: (res) => {
               this.magasins = res;
@@ -70,21 +79,7 @@ export class AddEmployeComponent {
             }
           })
       }
-      private authServices = inject(AuthService);
-      role = toSignal(this.authServices.role$);
-      constructor(private dialogRef: MatDialogRef<AddEmployeComponent>, private addEmployerService: AddEmployeService) {}
-      joursDisponible = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
-      toggleJour(jour: string, checked: boolean) {
-        const jours = this.employe.working_day.working_day;
-        const index = jours.indexOf(jour);
-
-        if(checked && index === -1) {
-          jours.push(jour);
-        } else if (!checked && index > -1){
-             jours.splice(index, 1);
-        }
-
-      }
+      
       validInput(username: string, lastname: string, email: string, magasins: string[]): string {
         const champs = [
           { nom: 'nom', valeur: username },
@@ -139,10 +134,7 @@ export class AddEmployeComponent {
         return "Employer ajouté";
       }
 
-      onSubmit() {
-        console.log('Employé ajouté :', this.employe);
-        this.dialogRef.close(); // Ferme la modale après ajout
-      }
+      
       ajouterEmploye() {
         const magasinsIds = this.magasins
           .filter(m => m.checked)
@@ -179,7 +171,7 @@ export class AddEmployeComponent {
           }
         };
       
-        console.log("Employé prêt à être ajouté :", data);
+        
       
         this.addEmployerService.addEmploye(data).subscribe({
           next: () => {

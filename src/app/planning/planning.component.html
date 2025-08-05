@@ -1,1 +1,10 @@
-<full-calendar [options]="calendarOptions"></full-calendar>
+<div *ngIf="role !== 'employe'">
+    <label>Sélectionnez les utilisateurs à afficher :</label>
+    <select multiple (change)="onUserSelectionChange($event)">
+      <option *ngFor="let user of allUsers" [value]="user.id">
+        {{ user.username }} {{ user.last_name }}
+      </option>
+    </select>
+  </div>
+  
+  <full-calendar [options]="calendarOptions"></full-calendar>

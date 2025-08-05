@@ -9,7 +9,7 @@ import { AuthService } from './auth-service.service';
   standalone: true,
   imports: [RouterOutlet, NavBarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'planningFront';

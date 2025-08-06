@@ -1,13 +1,9 @@
-# Étape 1 : Build Angular
-FROM node:20 AS builder
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build --configuration=production
-
-# Étape 2 : Serveur NGINX
 FROM nginx:alpine
-COPY --from=builder /app/dist/ /usr/share/nginx/html
+
+# ✅ On copie le build Angular local dans Nginx
+COPY dist /usr/share/nginx/html
+
+# ✅ Ta config nginx personnalisée (si tu en as une)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

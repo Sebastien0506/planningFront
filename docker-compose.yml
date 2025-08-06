@@ -19,9 +19,26 @@ services:
     volumes:
       - ../planningBack:/app     # ✅ Volume monté depuis le dossier frère
     restart: always
+    depends_on:
+      - db                       # ✅ S'assure que la DB démarre avant
+    networks:
+      - planning-network
+  
+  db:
+    image: postgres:17
+    container_name: planningDb
+    environment:
+      POSTGRES_DB: planningback
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - planning-network
 
 networks:
   planning-network:
     driver: bridge
+
+volumes:
+  postgres_data:

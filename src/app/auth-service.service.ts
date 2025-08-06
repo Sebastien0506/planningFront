@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from './environnement.prod';
+import { environment } from '../environment/environnement.prod';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

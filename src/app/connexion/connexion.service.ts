@@ -19,7 +19,7 @@ export class ConnexionService {
   // ✅ Retour typé : Observable<LoginResponse>
   //On crée la requête
   envoyerConnexion(data: any): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.apiUrl}/api/login`, data, {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/api/login/`, data, {
       withCredentials: true
     });
   }

@@ -7,9 +7,7 @@ function readCookie(name: string) : string | null {
       .split(';') // On découpe les valeurs reçut
       .find(row => row.startsWith('csrftoken=')) // On récupère celle qui commence par 'csrftoken'
       ?.split('=')[1]; // On récupère la valeur après le "="
- console.log(csrf);
-  
-  console.log('Cookie actuels : ', document.cookie);
+ 
   return csrf || null;
 }
 export function csrfInterceptor(req: HttpRequest<any>, next: HttpHandlerFn) : Observable<HttpEvent<any>> {

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   frontend:
     build: .
@@ -13,14 +11,13 @@ services:
       - planning-network
 
   backend:
-    image: planningback-backend  # <-- Le nom de ton image backend (à adapter)
-    container_name: planningBackend
     build:
-      context: ../planningBack  # <-- à adapter selon où se trouve ton backend
+      context: ../planningBack   # ✅ Chemin relatif vers le dossier frère
+    container_name: planningBackend
     ports:
       - "8000:8000"
     volumes:
-      - ../planningBack:/app  # <-- à adapter selon ton projet
+      - ../planningBack:/app     # ✅ Volume monté depuis le dossier frère
     restart: always
     networks:
       - planning-network

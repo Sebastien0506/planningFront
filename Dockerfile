@@ -1,9 +1,9 @@
 FROM nginx:alpine
 
-# ✅ On copie le build Angular local dans Nginx
-COPY dist /usr/share/nginx/html
+# ✅ On copie le build Angular dans le dossier NGINX
+COPY dist/browser /usr/share/nginx/html
 
-# ✅ Ta config nginx personnalisée (si tu en as une)
+# ✅ Configuration personnalisée de NGINX
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

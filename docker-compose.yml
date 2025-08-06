@@ -5,5 +5,26 @@ services:
     build: .
     container_name: planningFrontend
     ports:
-      - "80:80"  # Redirige port 4200 local vers port 80 du conteneur
+      - "80:80"
     restart: always
+    depends_on:
+      - backend
+    networks:
+      - planning-network
+
+  backend:
+    image: planningback-backend  # <-- Le nom de ton image backend (à adapter)
+    container_name: planningBackend
+    build:
+      context: ../planningBack  # <-- à adapter selon où se trouve ton backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../planningBack:/app  # <-- à adapter selon ton projet
+    restart: always
+    networks:
+      - planning-network
+
+networks:
+  planning-network:
+    driver: bridge

@@ -26,13 +26,13 @@ export class ConnexionComponent {
   valideInput(email: string, password: string): boolean {
     // Vérifie que l'email est bien une chaîne
     if (typeof email !== 'string') {
-      console.log("❌ L'email doit être une chaîne de caractères.");
+      
       return false;
     }
 
     // Vérifie que l'email contient bien un @ et un .
     if (!email.includes('@') || !email.includes('.')) {
-      console.log('❌ Email invalide : il doit contenir @ et .');
+      
       return false;
     }
 
@@ -47,16 +47,16 @@ export class ConnexionComponent {
         code !== 64 &&  // @
         code !== 46     // .
       ) {
-        console.log('❌ Email invalide : caractère non autorisé →', email[i]);
+        
         return false;
       }
     }
 
-    console.log('✅ Email valide.');
+    
 
     // Vérification du mot de passe
     if (typeof password !== 'string' || password.length < 6) {
-      console.log("❌ Mot de passe invalide : il doit contenir au moins 6 caractères.");
+      
       return false;
     }
     //On initialise les variables pour les caractère spéciaux
@@ -81,31 +81,27 @@ export class ConnexionComponent {
         code !== 35 && code !== 36 && code !== 37 && // # $ %
         code !== 64
       ) {
-        console.log('❌ Mot de passe invalide : caractère non autorisé →', password[i]);
+        
         return false;
       }
     }
 
     if (!contientChiffre || !contientCaractereSpecial) {
-      console.log("❌ Mot de passe invalide : il doit contenir au moins un chiffre et un caractère spécial (#, $, %, @).");
+      
       return false;
     }
 
-    console.log('✅ Email et mot de passe valide.');
+    
     return true;
   }
 
-  // 📦 Méthode pour afficher les valeurs si besoin
-  afficherValeurs(): void {
-    console.log('Email :', this.email);
-    console.log('Password :', this.password);
-  }
+  
   //On crée la fonction qui permet l'envoie des données au back
   envoyer() {
     //On vérifie si les données sont valide
     const estValide = this.valideInput(this.email, this.password);
     if(!estValide) {
-      console.log("Données invalides, requête bloquée.");
+      
       return;
     }
     //On stock les données dans la variable data
@@ -116,7 +112,7 @@ export class ConnexionComponent {
     //On envoie les données
    this.connexionService.envoyerConnexion(data).subscribe({
     next: (res) => {
-      console.log('Connexion réussie', res);
+      
 
       this.authService.fetchUserRole();
       //On redirige l'utilisteur

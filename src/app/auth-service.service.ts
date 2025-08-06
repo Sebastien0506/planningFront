@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from './environnement.prod';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -37,6 +38,6 @@ export class AuthService {
   }
 
   getCSRFToken() {
-    return this.http.get('http://localhost:8000/csrf', { withCredentials: true})
+    return this.http.get(`${environment.apiUrl}/csrf`, { withCredentials: true})
   }
 }

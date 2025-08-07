@@ -15,7 +15,7 @@ export class InscriptionService {
   constructor(private http: HttpClient) { }
 
   envoyerInscription(data: any) : Observable<InscriptionResponse> {
-    return this.http.post<InscriptionResponse>(`${environment}/api/add_admin/`, data, {
+    return this.http.post<InscriptionResponse>(`${environment.apiUrl}/api/add_admin/`, data, {
       withCredentials: true
     });
   }

@@ -20,6 +20,10 @@ export class InscriptionComponent {
 
   constructor(private inscriptionService: InscriptionService, private authService: AuthService, private router: Router){}
 
+  ngOnInit(){
+    this.authService.getCSRFToken().subscribe();
+  }
+  
   validInscription(username: string, lastname: string, email: string, password: string): string {
     //On crée une variable champs
     const champs = [

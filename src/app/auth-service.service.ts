@@ -38,6 +38,6 @@ export class AuthService {
   }
 
   getCSRFToken() {
-    return this.http.get(`${environment.apiUrl}/csrf`, { withCredentials: true})
+    return this.http.get(`${environment.apiUrl}/csrf/`, { withCredentials: true})
   }
 }

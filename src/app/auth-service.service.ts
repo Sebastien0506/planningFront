@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 //On fait une requête au back pour récupérer le role de l'utilisateur connecter 
   fetchUserRole() {
-    this.http.get<{ role: string }>(`${environment}/api/get_user_role/`, {
+    this.http.get<{ role: string }>(`${environment.apiUrl}/api/get_user_role/`, {
       withCredentials: true
     }).subscribe({//On récupère le role
       next: (res) => this.roleSubject.next(res.role),
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   logout() : void{
-    this.http.post('http://localhost:8000/logout/', {}, {
+    this.http.post(`${environment.apiUrl}/logout/`, {}, {
       withCredentials: true 
     }).subscribe({
       next: () => {

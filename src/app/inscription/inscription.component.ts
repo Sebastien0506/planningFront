@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { InscriptionService } from '../inscription.service';
+import { InscriptionService } from './inscription.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth-service.service';
 @Component({
@@ -23,7 +23,7 @@ export class InscriptionComponent {
   ngOnInit(){
     this.authService.getCSRFToken().subscribe();
   }
-  
+
   validInscription(username: string, lastname: string, email: string, password: string): string {
     //On crée une variable champs
     const champs = [

@@ -1,29 +1,53 @@
+version: '3.9'
+
 services:
-  frontend:
-    build: .
-    container_name: planningFrontend
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
     ports:
       - "80:80"
-    restart: always
-    depends_on:
-      - backend
-    networks:
-      - planning-network
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik:/etc/traefik/dynamic:ro
+      - ./certs:/certs:ro
+    networks: [planning-network]
+    restart: unless-stopped
+
+  frontend:
+    build: ./planningFront
+    container_name: planningFrontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=Host(`planeasy.localhost`,`www.planeasy.localhost`)"
+      - "traefik.http.routers.front.entrypoints=websecure"
+      - "traefik.http.routers.front.tls=true"
+      - "traefik.http.services.front.loadbalancer.server.port=80"
+    depends_on: [backend]
+    networks: [planning-network]
+    restart: unless-stopped
 
   backend:
-    build:
-      context: ../planningBack   # ✅ Chemin relatif vers le dossier frère
+    build: ./planningBack
     container_name: planningBackend
-    ports:
-      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      # Route /api sur le même host que le front
+      - "traefik.http.routers.api1.rule=Host(`planeasy.localhost`,`www.planeasy.localhost`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api1.entrypoints=websecure"
+      - "traefik.http.routers.api1.tls=true"
+      # Optionnel : sous-domaine api.*
+      - "traefik.http.routers.api2.rule=Host(`api.planeasy.localhost`)"
+      - "traefik.http.routers.api2.entrypoints=websecure"
+      - "traefik.http.routers.api2.tls=true"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
     volumes:
-      - ../planningBack:/app     # ✅ Volume monté depuis le dossier frère
-    restart: always
-    depends_on:
-      - db                       # ✅ S'assure que la DB démarre avant
-    networks:
-      - planning-network
-  
+      - ./planningBack:/app
+    depends_on: [db]
+    networks: [planning-network]
+    restart: unless-stopped
+
   db:
     image: postgres:17
     container_name: planningDb
@@ -33,8 +57,8 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - planning-network
+    networks: [planning-network]
+    restart: unless-stopped
 
 networks:
   planning-network:
